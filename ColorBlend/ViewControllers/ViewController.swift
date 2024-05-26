@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     var firstColor: UIColor = .red
     var secondColor:UIColor = .blue
     
+    var currentLanguage = "Ru"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +39,14 @@ class ViewController: UIViewController {
         colorPicker.delegate = self
         colorPicker.supportsAlpha = true
         present(colorPicker, animated: true)
+    }
+    @IBAction func toggleLanguage(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0: currentLanguage = "Ru"
+        default: currentLanguage = "En"
+        }
+        
+        updateTitles()
     }
 }
 
@@ -90,5 +100,17 @@ private extension ViewController {
         )
         
         return mixedColor
+    }
+    
+    func updateTitles() {
+        if currentLanguage == "Ru" {
+            firstColorLabel.text = "Первый цвет"
+            secondColorLabel.text = "Второй цвет"
+            resultColorLabel.text = "Результат"
+        } else if currentLanguage == "En" {
+            firstColorLabel.text = "First Color"
+            secondColorLabel.text = "Second Color"
+            resultColorLabel.text = "Result"
+        }
     }
 }
