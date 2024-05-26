@@ -58,7 +58,6 @@
 			children = (
 				6423A99F2C022C8100CADA04 /* App */,
 				6423A99D2C022C5E00CADA04 /* ViewControllers */,
-				6423A99E2C022C7500CADA04 /* Models */,
 				6423A9A02C022CC800CADA04 /* Storyboards */,
 				6423A9922C022C2700CADA04 /* Assets.xcassets */,
 			);
@@ -71,13 +70,6 @@
 				6423A98D2C022C2500CADA04 /* ViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		6423A99E2C022C7500CADA04 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		6423A99F2C022C8100CADA04 /* App */ = {
