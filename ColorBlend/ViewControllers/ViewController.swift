@@ -22,10 +22,16 @@ class ViewController: UIViewController {
     var firstColor: UIColor = .red
     var secondColor:UIColor = .blue
     
-    var currentLanguage = "Ru"
+    var currentLanguage: Language = .Ru
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupTitles(
+            firstTitle: "Первый цвет",
+            secondTitle: "Второй цвет",
+            resultTitle: "Результат"
+        )
         
         firstColorButton.backgroundColor = firstColor
         secondColorButton.backgroundColor = secondColor
@@ -35,15 +41,12 @@ class ViewController: UIViewController {
     
     @IBAction func showColorPicker(_ sender: UIButton) {
         activeButton = sender
-        let colorPicker = UIColorPickerViewController()
-        colorPicker.delegate = self
-        colorPicker.supportsAlpha = true
-        present(colorPicker, animated: true)
+        createColorPicker()
     }
     @IBAction func toggleLanguage(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0: currentLanguage = "Ru"
-        default: currentLanguage = "En"
+        case 0: currentLanguage = .Ru
+        default: currentLanguage = .En
         }
         
         updateTitles()
@@ -68,6 +71,13 @@ extension ViewController: UIColorPickerViewControllerDelegate {
     
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         activeButton = nil
+    }
+}
+
+extension ViewController {
+    enum Language {
+        case Ru
+        case En
     }
 }
 
@@ -102,15 +112,33 @@ private extension ViewController {
         return mixedColor
     }
     
+    func setupTitles(firstTitle: String, secondTitle: String, resultTitle: String) {
+        firstColorLabel.text = firstTitle
+        secondColorLabel.text = secondTitle
+        resultColorLabel.text = resultTitle
+    }
+    
     func updateTitles() {
-        if currentLanguage == "Ru" {
-            firstColorLabel.text = "Первый цвет"
-            secondColorLabel.text = "Второй цвет"
-            resultColorLabel.text = "Результат"
-        } else if currentLanguage == "En" {
-            firstColorLabel.text = "First Color"
-            secondColorLabel.text = "Second Color"
-            resultColorLabel.text = "Result"
+        if currentLanguage == .Ru {
+            setupTitles(
+                firstTitle: "Первый цвет",
+                secondTitle: "Второй цвет",
+                resultTitle: "Результат"
+            )
+        } else if currentLanguage == .En {
+            setupTitles(
+                firstTitle: "First Color",
+                secondTitle: "Second Color",
+                resultTitle: "Result"
+            )
         }
     }
+    
+    func createColorPicker() {
+        let colorPicker = UIColorPickerViewController()
+        colorPicker.delegate = self
+        colorPicker.supportsAlpha = true
+        present(colorPicker, animated: true)
+    }
 }
+
